@@ -12,10 +12,42 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final todolist = Todo.todolist();
   final _todoaddingitmes = TextEditingController();
+  List<Todo> _searchToDo = [];
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    _searchToDo = todolist;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 238, 93, 141),
+              ),
+              child: Text('Drawer Header'),
+            ),
+            Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              child: ListTile(
+                title: const Text('Data Log'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+            )
+          ],
+        ),
+      ),
       appBar: _upperNav(),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: Container(
@@ -46,7 +78,7 @@ class _HomeState extends State<Home> {
                               fontSize: 25, fontWeight: FontWeight.bold),
                         ),
                       ),
-                      for (Todo todo in todolist)
+                      for (Todo todo in _searchToDo)
                         Items(
                           todo: todo,
                           onChnages: _toDoChanges,
@@ -105,12 +137,28 @@ class _HomeState extends State<Home> {
     _todoaddingitmes.clear();
   }
 
+  void _search(String searchedKeyword) {
+    List<Todo> result = [];
+    if (searchedKeyword.isEmpty) {
+      result = todolist;
+    } else {
+      result = todolist
+          .where((item) =>
+              item.text!.toLowerCase().contains(searchedKeyword.toLowerCase()))
+          .toList();
+    }
+    setState(() {
+      _searchToDo = result;
+    });
+  }
+
   Widget searchbox() {
     return Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20), color: Colors.grey[100]),
-        child: const TextField(
-          decoration: InputDecoration(
+        child: TextField(
+          onChanged: (value) => _search(value),
+          decoration: const InputDecoration(
               prefixIcon: Icon(
                 Icons.search,
                 color: Colors.black,
@@ -137,7 +185,9 @@ class _HomeState extends State<Home> {
         child: Row(
           children: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                _scaffoldKey.currentState?.openDrawer();
+              },
               icon: const Icon(
                 Icons.menu,
                 size: 40,
