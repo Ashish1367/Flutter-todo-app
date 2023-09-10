@@ -24,7 +24,7 @@ class Items extends StatelessWidget {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          tileColor: Colors.amber[100],
+          tileColor: const Color(0xff5DEEBE),
           leading: Icon(
             todo.isDone ? Icons.radio_button_checked : Icons.radio_button_off,
             color: Colors.blue,
@@ -32,7 +32,8 @@ class Items extends StatelessWidget {
           title: Text(
             todo.text ?? "",
             style: TextStyle(
-                fontSize: 15,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
                 color: Colors.black,
                 decoration: todo.isDone ? TextDecoration.lineThrough : null),
           ),

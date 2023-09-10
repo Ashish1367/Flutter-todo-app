@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../model/todo.dart';
 import '../widgets/todo_items.dart';
@@ -11,12 +12,15 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final todolist = Todo.todolist();
-  final _todoaddingitmes = TextEditingController();
+  final TextEditingController _todoaddingitmes = TextEditingController();
   List<Todo> _searchToDo = [];
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final CollectionReference todoCollection =
+      FirebaseFirestore.instance.collection('todos');
 
   @override
   void initState() {
+    _loadTodoList();
     _searchToDo = todolist;
     super.initState();
   }
@@ -51,14 +55,14 @@ class _HomeState extends State<Home> {
       appBar: _upperNav(),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: Container(
-          margin: const EdgeInsets.only(top: 0.0),
+          margin: const EdgeInsets.only(bottom: 5.0),
           child: FloatingActionButton(
             onPressed: () {
               _addItems(_todoaddingitmes.text);
             },
             child: const Icon(Icons.add),
           )),
-      bottomNavigationBar: _bottomNav(),
+      // bottomNavigationBar: _bottomNav(),
       backgroundColor: Colors.white,
       body: Stack(
         children: [
@@ -93,7 +97,7 @@ class _HomeState extends State<Home> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              margin: const EdgeInsets.only(bottom: 20, right: 20, left: 20),
+              margin: const EdgeInsets.only(bottom: 15, right: 20, left: 20),
               decoration: BoxDecoration(
                 color: Colors.white,
                 boxShadow: const [
@@ -108,7 +112,9 @@ class _HomeState extends State<Home> {
               child: TextField(
                 controller: _todoaddingitmes,
                 decoration: const InputDecoration(
-                    hintText: 'Add A New Task', border: InputBorder.none),
+                    hintText: 'Add A New Task',
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20)),
               ),
             ),
           )
@@ -121,20 +127,27 @@ class _HomeState extends State<Home> {
     setState(() {
       todo.isDone = !todo.isDone;
     });
+    todoCollection.doc(todo.id).update({'isDone': todo.isDone});
   }
 
-  void _toDoDelete(String id) {
+  void _toDoDelete(String id) async {
     setState(() {
       todolist.removeWhere((item) => item.id == id);
     });
+    await FirebaseFirestore.instance.collection('todos').doc(id).delete();
   }
 
-  void _addItems(String todo) {
+  void _addItems(String todo) async {
+    final newTodo = (Todo(
+        id: DateTime.now().millisecondsSinceEpoch.toString(), text: todo));
+
     setState(() {
-      todolist.add(Todo(
-          id: DateTime.now().millisecondsSinceEpoch.toString(), text: todo));
+      todolist.add(newTodo);
     });
+
     _todoaddingitmes.clear();
+
+    await todoCollection.doc(newTodo.id).set(newTodo.toJson());
   }
 
   void _search(String searchedKeyword) {
@@ -149,6 +162,17 @@ class _HomeState extends State<Home> {
     }
     setState(() {
       _searchToDo = result;
+    });
+  }
+
+  Future<void> _loadTodoList() async {
+    final todoSnapshot = await todoCollection.get();
+
+    setState(() {
+      todolist.clear();
+      todolist.addAll(todoSnapshot.docs
+          .map((doc) => Todo.fromJson(doc.data() as Map<String, dynamic>))
+          .toList());
     });
   }
 
@@ -180,24 +204,5 @@ class _HomeState extends State<Home> {
       ),
       centerTitle: true,
     );
-  }
-
-  BottomAppBar _bottomNav() {
-    return BottomAppBar(
-        color: Colors.pink[300],
-        shape: const CircularNotchedRectangle(),
-        child: Row(
-          children: [
-            IconButton(
-              onPressed: () {
-                _scaffoldKey.currentState?.openDrawer();
-              },
-              icon: const Icon(
-                Icons.menu,
-                size: 40,
-              ),
-            ),
-          ],
-        ));
   }
 }
