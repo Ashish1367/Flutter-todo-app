@@ -25,7 +25,7 @@ class Items extends StatelessWidget {
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           tileColor: todo.isDone
-              ? Colors.grey
+              ? const Color.fromARGB(255, 213, 213, 213)
               : const Color.fromARGB(255, 119, 239, 199),
           leading: Icon(
             todo.isDone ? Icons.radio_button_checked : Icons.radio_button_off,
@@ -33,9 +33,11 @@ class Items extends StatelessWidget {
           ),
           title: Text(
             todo.text ?? "",
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 20,
-              color: Colors.black,
+              color: todo.isDone
+                  ? const Color.fromARGB(255, 114, 113, 113)
+                  : Colors.black,
             ),
           ),
           trailing: IconButton(
