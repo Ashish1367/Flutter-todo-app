@@ -14,8 +14,6 @@ class _HomeState extends State<Home> {
   final todolist = Todo.todolist();
   final TextEditingController _todoaddingitmes = TextEditingController();
   List<Todo> _searchToDo = [];
-  // final FocusNode _focusNode = FocusNode();
-  // bool iskeyboardvisible = false;
   final CollectionReference todoCollection =
       FirebaseFirestore.instance.collection('todos');
 
@@ -24,11 +22,6 @@ class _HomeState extends State<Home> {
     _loadTodoList();
     _searchToDo = todolist;
     super.initState();
-    // _focusNode.addListener(() {
-    //   setState(() {
-    //     iskeyboardvisible = _focusNode.hasFocus;
-    //   });
-    // });
   }
 
   @override
@@ -38,29 +31,6 @@ class _HomeState extends State<Home> {
           FocusScope.of(context).unfocus();
         },
         child: Scaffold(
-          drawer: Drawer(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: [
-                const DrawerHeader(
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 238, 93, 141),
-                  ),
-                  child: Text('Drawer Header'),
-                ),
-                Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  child: ListTile(
-                    title: const Text('Data Log'),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                )
-              ],
-            ),
-          ),
           appBar: _upperNav(),
           floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
           floatingActionButton: Container(
@@ -83,6 +53,8 @@ class _HomeState extends State<Home> {
                     searchbox(),
                     Expanded(
                       child: ListView(
+                        keyboardDismissBehavior:
+                            ScrollViewKeyboardDismissBehavior.onDrag,
                         children: [
                           Container(
                             margin: const EdgeInsets.only(top: 40, bottom: 20),

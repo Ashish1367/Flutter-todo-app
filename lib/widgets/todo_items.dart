@@ -33,7 +33,6 @@ class Items extends StatelessWidget {
             todo.text ?? "",
             style: TextStyle(
                 fontSize: 20,
-                // fontWeight: FontWeight.bold,
                 color: Colors.black,
                 decoration: todo.isDone ? TextDecoration.lineThrough : null),
           ),
