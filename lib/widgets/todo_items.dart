@@ -24,17 +24,20 @@ class Items extends StatelessWidget {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          tileColor: const Color.fromARGB(255, 119, 239, 199),
+          tileColor: todo.isDone
+              ? Colors.grey
+              : const Color.fromARGB(255, 119, 239, 199),
           leading: Icon(
             todo.isDone ? Icons.radio_button_checked : Icons.radio_button_off,
             color: Colors.blue,
           ),
           title: Text(
             todo.text ?? "",
-            style: TextStyle(
-                fontSize: 20,
-                color: Colors.black,
-                decoration: todo.isDone ? TextDecoration.lineThrough : null),
+            style: const TextStyle(
+              fontSize: 20,
+              color: Colors.black,
+              // decoration: todo.isDone ? TextDecoration.lineThrough : null
+            ),
           ),
           trailing: IconButton(
             icon: const Icon(

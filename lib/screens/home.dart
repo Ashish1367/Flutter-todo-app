@@ -130,7 +130,7 @@ class _HomeState extends State<Home> {
                           child: Text(
                             '+',
                             style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
+                                fontSize: 30, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),
