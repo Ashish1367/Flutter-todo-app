@@ -24,7 +24,7 @@ class Items extends StatelessWidget {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          tileColor: const Color(0xff5DEEBE),
+          tileColor: const Color.fromARGB(255, 119, 239, 199),
           leading: Icon(
             todo.isDone ? Icons.radio_button_checked : Icons.radio_button_off,
             color: Colors.blue,
@@ -38,8 +38,8 @@ class Items extends StatelessWidget {
           ),
           trailing: IconButton(
             icon: const Icon(
-              Icons.delete_forever_rounded,
-              color: Colors.red,
+              Icons.delete,
+              color: Color.fromARGB(255, 246, 61, 48),
               size: 25,
             ),
             onPressed: () {
