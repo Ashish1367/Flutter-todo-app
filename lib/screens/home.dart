@@ -32,16 +32,16 @@ class _HomeState extends State<Home> {
         },
         child: Scaffold(
           appBar: _upperNav(),
-          floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-          floatingActionButton: Container(
-            margin: const EdgeInsets.only(bottom: 5),
-            child: FloatingActionButton(
-              onPressed: () {
-                _addItems(_todoaddingitmes.text);
-              },
-              child: const Icon(Icons.add),
-            ),
-          ),
+          // floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+          // floatingActionButton: Container(
+          //   margin: const EdgeInsets.only(bottom: 5),
+          //   child: FloatingActionButton(
+          //     onPressed: () {
+          //       _addItems(_todoaddingitmes.text);
+          //     },
+          //     child: const Icon(Icons.add),
+          //   ),
+          // ),
           backgroundColor: Colors.white,
           body: Stack(
             children: [
@@ -78,27 +78,64 @@ class _HomeState extends State<Home> {
               ),
               Align(
                 alignment: Alignment.bottomCenter,
-                child: Container(
-                  margin:
-                      const EdgeInsets.only(bottom: 15, left: 20, right: 20),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: const [
-                      BoxShadow(
-                          color: Colors.grey,
-                          offset: Offset(0.0, 0.0),
-                          blurRadius: 10.0,
-                          spreadRadius: 0.0)
-                    ],
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: TextField(
-                    controller: _todoaddingitmes,
-                    decoration: const InputDecoration(
-                        hintText: 'Add A New Task',
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 20)),
-                  ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        margin: const EdgeInsets.only(
+                            bottom: 15, left: 20, right: 20),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          boxShadow: const [
+                            BoxShadow(
+                                color: Colors.grey,
+                                offset: Offset(0.0, 0.0),
+                                blurRadius: 10.0,
+                                spreadRadius: 0.0)
+                          ],
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: TextField(
+                          controller: _todoaddingitmes,
+                          decoration: const InputDecoration(
+                              hintText: 'Add A New Task',
+                              border: InputBorder.none,
+                              contentPadding:
+                                  EdgeInsets.symmetric(horizontal: 20)),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: 50,
+                      width: 60,
+                      margin: const EdgeInsets.only(bottom: 20, right: 20),
+                      decoration: BoxDecoration(
+                        boxShadow: const [
+                          BoxShadow(
+                              color: Colors.grey,
+                              offset: Offset(0.0, 0.0),
+                              blurRadius: 10.0,
+                              spreadRadius: 0.0)
+                        ],
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          _addItems(_todoaddingitmes.text);
+                        },
+                        style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10))),
+                        child: const Center(
+                          child: Text(
+                            '+',
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
                 ),
               )
             ],
