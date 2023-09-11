@@ -182,7 +182,7 @@ class _HomeState extends State<Home> {
       elevation: 0,
       backgroundColor: Colors.pink[300],
       title: const Text(
-        'To_Do Application',
+        'TODO',
         textAlign: TextAlign.center,
       ),
       centerTitle: true,
