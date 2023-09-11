@@ -36,7 +36,6 @@ class Items extends StatelessWidget {
             style: const TextStyle(
               fontSize: 20,
               color: Colors.black,
-              // decoration: todo.isDone ? TextDecoration.lineThrough : null
             ),
           ),
           trailing: IconButton(
