@@ -29,7 +29,9 @@ class Items extends StatelessWidget {
               : const Color.fromARGB(255, 119, 239, 199),
           leading: Icon(
             todo.isDone ? Icons.radio_button_checked : Icons.radio_button_off,
-            color: Colors.blue,
+            color: todo.isDone
+                ? const Color.fromARGB(255, 114, 113, 113)
+                : Colors.blue,
           ),
           title: Text(
             todo.text ?? "",
@@ -41,9 +43,11 @@ class Items extends StatelessWidget {
             ),
           ),
           trailing: IconButton(
-            icon: const Icon(
+            icon: Icon(
               Icons.delete,
-              color: Color.fromARGB(255, 246, 61, 48),
+              color: todo.isDone
+                  ? const Color.fromARGB(255, 114, 113, 113)
+                  : const Color.fromARGB(255, 246, 61, 48),
               size: 25,
             ),
             onPressed: () {

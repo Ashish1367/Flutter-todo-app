@@ -32,16 +32,6 @@ class _HomeState extends State<Home> {
         },
         child: Scaffold(
           appBar: _upperNav(),
-          // floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-          // floatingActionButton: Container(
-          //   margin: const EdgeInsets.only(bottom: 5),
-          //   child: FloatingActionButton(
-          //     onPressed: () {
-          //       _addItems(_todoaddingitmes.text);
-          //     },
-          //     child: const Icon(Icons.add),
-          //   ),
-          // ),
           backgroundColor: Colors.white,
           body: Stack(
             children: [
@@ -83,7 +73,7 @@ class _HomeState extends State<Home> {
                     Expanded(
                       child: Container(
                         margin: const EdgeInsets.only(
-                            bottom: 15, left: 20, right: 20),
+                            bottom: 18, left: 12, right: 12),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           boxShadow: const [
@@ -108,7 +98,7 @@ class _HomeState extends State<Home> {
                     Container(
                       height: 50,
                       width: 60,
-                      margin: const EdgeInsets.only(bottom: 20, right: 20),
+                      margin: const EdgeInsets.only(bottom: 20, right: 10),
                       decoration: BoxDecoration(
                         boxShadow: const [
                           BoxShadow(
