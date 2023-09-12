@@ -15,7 +15,7 @@ class Items extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 20),
+      margin: const EdgeInsets.only(bottom: 12),
       child: ListTile(
           onTap: () {
             onChnages(todo);
@@ -23,7 +23,7 @@ class Items extends StatelessWidget {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           contentPadding:
-              const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
           tileColor: todo.isDone
               ? const Color.fromARGB(255, 213, 213, 213)
               : const Color.fromARGB(255, 119, 239, 199),
@@ -36,7 +36,7 @@ class Items extends StatelessWidget {
           title: Text(
             todo.text ?? "",
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 18,
               color: todo.isDone
                   ? const Color.fromARGB(255, 114, 113, 113)
                   : Colors.black,

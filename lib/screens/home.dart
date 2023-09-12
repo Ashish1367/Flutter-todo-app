@@ -33,54 +33,59 @@ class _HomeState extends State<Home> {
         child: Scaffold(
           appBar: _upperNav(),
           backgroundColor: Colors.white,
-          body: Stack(
+          body: Column(
             children: [
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                child: Column(
-                  children: [
-                    searchbox(),
-                    Expanded(
-                      child: ListView(
-                        keyboardDismissBehavior:
-                            ScrollViewKeyboardDismissBehavior.onDrag,
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(top: 40, bottom: 20),
-                            child: const Text(
-                              'Work Needs To be Done',
-                              style: TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.bold),
+              Expanded(
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  child: Column(
+                    children: [
+                      searchbox(),
+                      Expanded(
+                        child: ListView(
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(
+                                  left: 10, top: 10, bottom: 0),
+                              child: const Text(
+                                'tasks to do',
+                                style: TextStyle(
+                                    fontSize: 24, fontWeight: FontWeight.w400),
+                              ),
                             ),
-                          ),
-                          for (Todo todo in _searchToDo)
-                            Items(
-                              todo: todo,
-                              onChnages: _toDoChanges,
-                              toDelete: _toDoDelete,
+                            const Divider(
+                              thickness: 0.6,
+                              color: Color.fromARGB(255, 172, 172, 172),
                             ),
-                        ],
+                            for (Todo todo in _searchToDo)
+                              Items(
+                                todo: todo,
+                                onChnages: _toDoChanges,
+                                toDelete: _toDoDelete,
+                              ),
+                          ],
+                        ),
                       ),
-                    )
-                  ],
+                    ],
+                  ),
                 ),
               ),
-              Align(
-                alignment: Alignment.bottomCenter,
+              Container(
+                color: Colors.white, // This ensures a constant white background
                 child: Row(
                   children: [
                     Expanded(
                       child: Container(
                         margin: const EdgeInsets.only(
-                            bottom: 18, left: 12, right: 12),
+                            bottom: 4, left: 12, right: 8, top: 4),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           boxShadow: const [
                             BoxShadow(
                                 color: Colors.grey,
                                 offset: Offset(0.0, 0.0),
-                                blurRadius: 10.0,
+                                blurRadius: 2.0,
                                 spreadRadius: 0.0)
                           ],
                           borderRadius: BorderRadius.circular(10),
@@ -88,7 +93,7 @@ class _HomeState extends State<Home> {
                         child: TextField(
                           controller: _todoaddingitmes,
                           decoration: const InputDecoration(
-                              hintText: 'Add A New Task',
+                              hintText: 'add a new task',
                               border: InputBorder.none,
                               contentPadding:
                                   EdgeInsets.symmetric(horizontal: 20)),
@@ -98,13 +103,14 @@ class _HomeState extends State<Home> {
                     Container(
                       height: 50,
                       width: 60,
-                      margin: const EdgeInsets.only(bottom: 20, right: 10),
+                      margin:
+                          const EdgeInsets.only(bottom: 2, right: 10, top: 2),
                       decoration: BoxDecoration(
                         boxShadow: const [
                           BoxShadow(
                               color: Colors.grey,
                               offset: Offset(0.0, 0.0),
-                              blurRadius: 10.0,
+                              blurRadius: 4.0,
                               spreadRadius: 0.0)
                         ],
                         borderRadius: BorderRadius.circular(10),
@@ -127,7 +133,7 @@ class _HomeState extends State<Home> {
                     )
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ));
@@ -188,6 +194,7 @@ class _HomeState extends State<Home> {
 
   Widget searchbox() {
     return Container(
+        padding: const EdgeInsets.only(left: 6),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20), color: Colors.grey[100]),
         child: TextField(
@@ -196,11 +203,12 @@ class _HomeState extends State<Home> {
               prefixIcon: Icon(
                 Icons.search,
                 color: Colors.black,
-                size: 20,
+                size: 28,
               ),
               border: InputBorder.none,
-              hintText: 'Search',
-              hintStyle: TextStyle(color: Colors.black, fontSize: 20)),
+              hintText: 'search...',
+              hintStyle: TextStyle(
+                  color: Color.fromARGB(255, 110, 110, 110), fontSize: 20)),
         ));
   }
 
@@ -208,11 +216,15 @@ class _HomeState extends State<Home> {
     return AppBar(
       elevation: 0,
       backgroundColor: Colors.pink[300],
-      title: const Text(
-        'TODO',
-        textAlign: TextAlign.center,
+      title: const Padding(
+        padding: EdgeInsets.only(
+            left: 8.0, top: 8.0), // Adjust the padding values as needed
+        child: Text(
+          'todo',
+          textAlign: TextAlign.left,
+          style: TextStyle(color: Colors.white, fontSize: 26),
+        ),
       ),
-      centerTitle: true,
     );
   }
 }
