@@ -32,7 +32,7 @@ class _HomeState extends State<Home> {
         },
         child: Scaffold(
           appBar: _upperNav(),
-          backgroundColor: Colors.white,
+          backgroundColor: const Color.fromARGB(255, 85, 65, 75),
           body: Column(
             children: [
               Expanded(
@@ -51,12 +51,14 @@ class _HomeState extends State<Home> {
                               child: const Text(
                                 'tasks to do',
                                 style: TextStyle(
-                                    fontSize: 24, fontWeight: FontWeight.w400),
+                                    fontSize: 26,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color.fromARGB(218, 255, 255, 255)),
                               ),
                             ),
                             const Divider(
                               thickness: 0.6,
-                              color: Color.fromARGB(255, 172, 172, 172),
+                              color: Color.fromARGB(255, 85, 65, 75),
                             ),
                             for (Todo todo in _searchToDo)
                               Items(
@@ -72,7 +74,8 @@ class _HomeState extends State<Home> {
                 ),
               ),
               Container(
-                color: Colors.white, // This ensures a constant white background
+                color: const Color.fromARGB(255, 85, 65,
+                    75), // This ensures a constant white background
                 child: Row(
                   children: [
                     Expanded(
@@ -80,7 +83,7 @@ class _HomeState extends State<Home> {
                         margin: const EdgeInsets.only(
                             bottom: 4, left: 12, right: 8, top: 4),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: const Color.fromARGB(255, 243, 238, 233),
                           boxShadow: const [
                             BoxShadow(
                                 color: Colors.grey,
@@ -121,7 +124,9 @@ class _HomeState extends State<Home> {
                         },
                         style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10))),
+                                borderRadius: BorderRadius.circular(10)),
+                            backgroundColor:
+                                const Color.fromARGB(255, 243, 238, 233)),
                         child: const Center(
                           child: Text(
                             '+',
@@ -196,7 +201,8 @@ class _HomeState extends State<Home> {
     return Container(
         padding: const EdgeInsets.only(left: 6),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20), color: Colors.grey[100]),
+            borderRadius: BorderRadius.circular(20),
+            color: const Color.fromARGB(255, 243, 238, 233)),
         child: TextField(
           onChanged: (value) => _search(value),
           decoration: const InputDecoration(
@@ -215,14 +221,18 @@ class _HomeState extends State<Home> {
   AppBar _upperNav() {
     return AppBar(
       elevation: 0,
-      backgroundColor: Colors.pink[300],
+      backgroundColor: const Color.fromARGB(255, 85, 65, 75),
       title: const Padding(
         padding: EdgeInsets.only(
             left: 8.0, top: 8.0), // Adjust the padding values as needed
-        child: Text(
-          'todo',
-          textAlign: TextAlign.left,
-          style: TextStyle(color: Colors.white, fontSize: 26),
+        child: Center(
+          child: Text(
+            'Todo',
+            style: TextStyle(
+                color: Color.fromARGB(218, 255, 255, 255),
+                fontSize: 26,
+                fontWeight: FontWeight.w800),
+          ),
         ),
       ),
     );
